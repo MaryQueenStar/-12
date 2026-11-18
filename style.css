@@ -1,0 +1,195 @@
+/* Общие настройки */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+    font-family: 'Courier New', Courier, monospace;
+    user-select: none;
+}
+
+.game-container {
+    width: 800px;
+    height: 400px;
+    background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); /* Голубое небо */
+    position: relative;
+    overflow: hidden;
+    border: 4px solid #111;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* --- ФОН --- */
+.clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/clouds.png'); /* Бесплатный паттерн облаков */
+    opacity: 0.6;
+    animation: moveClouds 20s linear infinite;
+}
+
+@keyframes moveClouds {
+    0% { background-position: 0 0; }
+    100% { background-position: -800px 0; }
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #5E3A11; /* Коричневая земля */
+    border-top: 4px solid #8B5A2B;
+    /* Простая текстура травы */
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px);
+}
+
+/* --- МАРИО (Собран из кусочков) --- */
+#mario {
+    width: 40px;
+    height: 60px;
+    position: absolute;
+    bottom: 80px;
+    left: 50px;
+    z-index: 10;
+    transition: bottom 0.1s;
+}
+
+/* Анимация прыжка */
+.jump {
+    animation: jump-animation 0.6s ease-in-out;
+}
+
+@keyframes jump-animation {
+    0% { bottom: 80px; }
+    50% { bottom: 220px; }
+    100% { bottom: 80px; }
+}
+
+/* Анимация бега (немного двигаем ноги) */
+#mario .legs {
+    animation: run 0.3s infinite alternate;
+}
+
+@keyframes run {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(2px); }
+}
+
+/* Детали Марио */
+.hat {
+    width: 100%;
+    height: 15px;
+    background-color: #E52521;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+}
+.hat::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 5px;
+    width: 20px;
+    height: 5px;
+    background-color: #E52521;
+    border-radius: 5px;
+}
+
+.face {
+    width: 100%;
+    height: 20px;
+    background-color: #FFC1A1; /* Цвет кожи */
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.eye {
+    width: 4px;
+    height: 8px;
+    background-color: #000;
+    border-radius: 2px;
+}
+
+.mustache {
+    position: absolute;
+    bottom: 2px;
+    width: 30px;
+    height: 5px;
+    background-color: #000;
+    border-radius: 5px;
+}
+
+.body {
+    width: 100%;
+    height: 15px;
+    background-color: #0055FF; /* Синий комбинезон */
+}
+
+.legs {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 10px;
+}
+.leg-left, .leg-right {
+    width: 15px;
+    height: 10px;
+    background-color: #5E3A11; /* Коричневые ботинки */
+}
+
+/* --- ПРЕПЯТСТВИЯ --- */
+#obstacle {
+    position: absolute;
+    bottom: 80px;
+    left: 800px;
+    z-index: 5;
+    /* Начальные размеры (будут меняться через JS) */
+    width: 40px; 
+    height: 60px; 
+    background-color: #4CAF50;
+    border-radius: 5px 5px 0 0;
+    box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2);
+}
+
+/* --- ИНТЕРФЕЙС --- */
+#score {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    z-index: 10;
+}
+
+#game-over {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 20;
+    border: 4px solid #E52521;
+    box-shadow: 0 0 20px rgba(229, 37, 33, 0.5);
+}
+
+#game-over h2 {
+    margin: 0 0 10px 0;
+    color: #E52521;
+}
+
+#restart-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
