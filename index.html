@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Супер Марио: Беги и прыгай!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Игровое поле -->
+    <div class="game-container">
+        <!-- Фон (движущиеся облака) -->
+        <div class="clouds"></div>
+        
+        <!-- Земля -->
+        <div class="ground"></div>
+
+        <!-- Интерфейс -->
+        <div id="score">Счет: 0</div>
+        
+        <!-- Сам Марио -->
+        <div id="mario">
+            <div class="hat"></div>
+            <div class="face">
+                <div class="eye"></div>
+                <div class="mustache"></div>
+            </div>
+            <div class="body"></div>
+            <div class="legs">
+                <div class="leg-left"></div>
+                <div class="leg-right"></div>
+            </div>
+        </div>
+
+        <!-- Препятствие -->
+        <div id="obstacle"></div>
+
+        <!-- Экран проигрыша -->
+        <div id="game-over">
+            <h2>Игра окончена!</h2>
+            <p>Ваш счет: <span id="final-score">0</span></p>
+            <button id="restart-btn">Играть снова</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
